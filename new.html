@@ -27,7 +27,7 @@
             height: 40px;
             margin-bottom: 20px;
             cursor: pointer;
-            margin-left: 100px;
+            margin-left: 128px;
             margin-bottom: 80px;
         }
         .petal {
@@ -75,8 +75,8 @@
         }
         .carousel {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 600px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,8 +84,8 @@
         }
         .carousel img {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 120px; 
+            height: 120px;
             border-radius: 50%;
             transition: transform 0.5s;
         }
@@ -111,12 +111,12 @@
         </div>
     </div>
 
-    <!-- Carousel -->
+
     <div class="carousel" id="carousel"></div>
 
     <script>
         const images = [
-            'flower1.jpg', 'flower2.jpg', 'flower3.jpg', 'flower4.jpg', 'flower5.jpg', 'flower6.jpg'
+            'pic2.jpeg', 'flower2.jpg', 'flower3.jpg', 'flower4.jpg', 'flower5.jpg', 'flower6.jpg'
         ];
         let angle = 0;
         let direction = 1;
@@ -125,14 +125,14 @@
         images.forEach((src, i) => {
             const img = document.createElement('img');
             img.src = src;
-            img.style.transform = `rotate(${i * (360 / images.length)}deg) translate(150px) rotate(-${i * (360 / images.length)}deg)`;
+            img.style.transform = `rotate(${i * (360 / images.length)}deg) translate(250px) rotate(-${i * (360 / images.length)}deg)`; /* Increased translate distance */
             carousel.appendChild(img);
         });
 
         function rotateCarousel() {
             angle += direction * 60;
             carousel.childNodes.forEach((img, i) => {
-                img.style.transform = `rotate(${angle + i * (360 / images.length)}deg) translate(150px) rotate(-${angle + i * (360 / images.length)}deg)`;
+                img.style.transform = `rotate(${angle + i * (360 / images.length)}deg) translate(250px) rotate(-${angle + i * (360 / images.length)}deg)`; /* Adjusted translate distance */
             });
             document.body.style.backgroundImage = `url(${images[(angle / 60) % images.length]})`;
             if (angle % 360 === 0) direction *= -1;
