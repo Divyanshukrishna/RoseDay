@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Flower - Gallery</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-size: cover;
+            position: relative;
+            transition: background 0.5s ease-in-out;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        .rose {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            margin-left: 100px;
+            margin-bottom: 80px;
+        }
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .petal:nth-child(1) { top: 0; left: 10px; }
+        .petal:nth-child(2) { top: 10px; left: 0; }
+        .petal:nth-child(3) { top: 10px; right: 0; }
+        .petal:nth-child(4) { bottom: 0; left: 10px; }
+        .center {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: darkred;
+            border-radius: 50%;
+        }
+        .stem {
+            position: absolute;
+            top: 40px;
+            left: 17px;
+            width: 4px;
+            height: 60px;
+            background-color: green;
+        }
+        .text {
+            margin-top: 20px;
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 20px;
+            color: #ff00ff;
+            text-shadow: 2px 2px 5px #ff0000;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            text-align: center;
+        }
+        .carousel {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 0;
+        }
+        .carousel img {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            transition: transform 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Content Container -->
+    <div class="container">
+        <div class="rose">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+            <div class="stem"></div>
+        </div>
+        <div class="text">AYUSHIV</div>
+
+        <!-- Message -->
+        <div class="message">
+            Your smile is as beautiful as a Rose <br />
+            I have something for your smile
+        </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel" id="carousel"></div>
+
+    <script>
+        const images = [
+            'flower1.jpg', 'flower2.jpg', 'flower3.jpg', 'flower4.jpg', 'flower5.jpg', 'flower6.jpg'
+        ];
+        let angle = 0;
+        let direction = 1;
+        const carousel = document.getElementById('carousel');
+
+        images.forEach((src, i) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.transform = `rotate(${i * (360 / images.length)}deg) translate(150px) rotate(-${i * (360 / images.length)}deg)`;
+            carousel.appendChild(img);
+        });
+
+        function rotateCarousel() {
+            angle += direction * 60;
+            carousel.childNodes.forEach((img, i) => {
+                img.style.transform = `rotate(${angle + i * (360 / images.length)}deg) translate(150px) rotate(-${angle + i * (360 / images.length)}deg)`;
+            });
+            document.body.style.backgroundImage = `url(${images[(angle / 60) % images.length]})`;
+            if (angle % 360 === 0) direction *= -1;
+        }
+        setInterval(rotateCarousel, 2000);
+    </script>
+</body>
+</html>
